@@ -1,0 +1,13 @@
+version:  '2'
+ 
+services:     
+    keycloak:
+        image: jboss/keycloak:latest
+        environment:          
+            KEYCLOAK_USER: admin
+            KEYCLOAK_PASSWORD: admin
+            #IMPORTANT! Enable these options to enable Rule-based policy:  -Dkeycloak.profile.feature.scripts=enabled -Dkeycloak.profile.feature.upload_scripts=enabled
+            JAVA_OPTS: "-Dkeycloak.profile.feature.scripts=enabled -Dkeycloak.profile.feature.upload_scripts=enabled -server -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true  --add-exports=java.base/sun.nio.ch=ALL-UNNAMED --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED --add-exports=jdk.unsupported/sun.reflect=ALL-UNNAMED"
+        ports: 
+            - 9123:8080
+            - 9990:9990
